@@ -13,11 +13,11 @@ Scenario: Set private tool as public
     And a browser is at private tool detail page
     When producer changes state to public
     Then producer should see info item state changed
-    And producer should see method detail page
+    And producer should see tool detail page
     And consumer should see tool in list of tools
 #test 17
 Scenario: Create tool with publish time in future:
-    Given a browser is at add method form
+    Given a browser is at add tool form
     When producer fills required inputs
     And producer fills tomorow date in publishing date
     And producer clicks on save button
@@ -26,7 +26,7 @@ Scenario: Create tool with publish time in future:
     But consumer should not see tool in tools list
 #test 18
 Scenario: Create tool with publish time in past:
-    Given a browser is at add method form
+    Given a browser is at add tool form
     When producer fills required inputs
     And producer fills yesterday date in publishing date
     And producer clicks on save button
