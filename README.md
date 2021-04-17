@@ -1,6 +1,6 @@
 # ITS Projekt 1
 
-- **Autor:** Josef Kotoun
+- **Autor:** Josef Kotoun, xkotou06
 - **Datum:** 2021-04-17
 
 ## Matice pokrytí artefaktů
