@@ -6,7 +6,7 @@ import behave
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import WebDriverException
-from steps.classes import ploneGlobal
+from steps.pages import ploneGlobal
 def before_all(context):
     try:
         context.driver = webdriver.Remote(
@@ -18,10 +18,9 @@ def before_all(context):
             desired_capabilities=DesiredCapabilities.FIREFOX)
     context.driver.implicitly_wait(5)
     context.base_url = "http://localhost:8080/VALU3S"
+    ploneGlobal.login(context.driver, "itsadmin", "itsadmin", context.base_url)
     
     
 def after_all(context):
     context.driver.quit()
 
-def before_scenario(context, scenario):
-    ploneGlobal.login(context.driver, "itsadmin", "itsadmin", context.base_url)

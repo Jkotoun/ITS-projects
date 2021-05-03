@@ -8,7 +8,7 @@ from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions 
 
-from classes import *
+from pages import *
 
 
 @given('a browser is at public method detail page')
@@ -42,6 +42,7 @@ def stem_impl(context):
     methodsListPage = detailsList(context.driver, f"{context.base_url}/methods")
     methodsListPage.load()
     assert not methodsListPage.detail_name_displayed(selectedMethod)
+    ploneGlobal.login(context.driver, "itsadmin", "itsadmin", context.base_url)
 
 @given('a browser is at private method detail page')
 def step_impl(context):
@@ -63,4 +64,5 @@ def step_impl(context):
     methodsListPage = detailsList(context.driver, f"{context.base_url}/methods")
     methodsListPage.load()
     assert methodsListPage.detail_name_displayed(selectedMethod)
+    ploneGlobal.login(context.driver, "itsadmin", "itsadmin", context.base_url)
 

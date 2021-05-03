@@ -8,6 +8,7 @@ from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions 
 import time
+import uuid
 class detailsList:
     def __init__(self, driver, url):
         self.driver = driver
@@ -35,6 +36,7 @@ class detailPage:
         return self.driver.find_element_by_xpath("//*[@id='formfield-form-widgets-tools']//a").text != ""
     def testcase_reference_exists(self):
         return self.driver.find_element_by_xpath("//*[@id='formfield-form-widgets-tools']//a").text != ""
+    
     
 
 class ploneGlobal:
@@ -66,6 +68,14 @@ class ploneGlobal:
     def logout(driver):
         driver.find_element_by_xpath("//*[@id='portal-personaltools']//a").click()
         driver.find_element_by_xpath("//*[@id='personaltools-logout']").click()
+    @staticmethod
+    def add_testcase_action(driver):
+        driver.find_element_by_id("plone-contentmenu-factories").click()
+        driver.find_element_by_id("test_case").click()
+    @staticmethod
+    def add_evaluation_scenario(driver):
+        driver.find_element_by_id("plone-contentmenu-factories").click()
+        driver.find_element_by_id("evaluation_scenario").click()
 
 class addForm:
     def __init__(self, driver):
@@ -89,11 +99,18 @@ class addForm:
         self.driver.switch_to.default_content()
     def requirement_fill_required(self, title):
         self.driver.find_element_by_id("form-widgets-IDublinCore-title").send_keys(title)
+    def evaluation_scenario_fill_required(self, title, id, description):
+        self.driver.find_element_by_id("form-widgets-IBasic-title").send_keys(title)
+        self.driver.find_element_by_id("form-widgets-evaluation_secnario_id").send_keys(id)
+        self.driver.find_element_by_id("form-widgets-evaluation_scenario_textual_description").send_keys(description)
     def addToolRelation(self, tool_name):
         self.driver.find_element_by_id("autotoc-item-autotoc-2").click()
         self.driver.find_element_by_xpath("//*[@id='formfield-form-widgets-tools']//a[@class='crumb']").click()
         self.driver.find_element_by_id("s2id_autogen12").send_keys(tool_name)
         self.driver.find_element_by_xpath("//*[@id='select2-drop']//a[@class='pattern-relateditems-result-select selectable']").click()
+    def testcase_fill_required(self, title, id):
+        self.driver.find_element_by_id("form-widgets-IBasic-title").send_keys(title)
+        self.driver.find_element_by_id("form-widgets-test_case_id").send_keys(id)
     def addTestcaseRelation(self, testcase_name):
         self.driver.find_element_by_id("autotoc-item-autotoc-2").click()
         self.driver.find_element_by_xpath("//*[@id='formfield-form-widgets-test_case_or_verification_and_validation_activity']//a[@class='crumb']").click()
@@ -101,3 +118,14 @@ class addForm:
         self.driver.find_element_by_xpath("//*[@id='select2-drop']//a[@class='pattern-relateditems-result-select selectable']").click()
     def save(self):
         self.driver.find_element_by_id("form-buttons-save").click()
+    def add_method_reference_in_testcase(self, testcase_name):
+        self.driver.find_element_by_xpath("//*[@class='crumb']").click()
+        self.driver.find_element_by_id("s2id_autogen2").send_keys("Combinatorial Testing")
+        self.driver.find_element_by_xpath("//*[@id='select2-drop']//a[@class='pattern-relateditems-result-select selectable']").click()
+    def add_scenario_requirement_reference(self, requirement_name):
+        self.driver.find_element_by_id("autotoc-item-autotoc-1").click()
+        self.driver.find_element_by_xpath("//*[@id='formfield-form-widgets-evaluation_scenario_requirements_list']//a").click()
+        self.driver.find_element_by_id("s2id_autogen2").send_keys(requirement_name)
+        self.driver.find_element_by_xpath("//*[@id='select2-drop']//a[@class='pattern-relateditems-result-select selectable']").click()
+
+
