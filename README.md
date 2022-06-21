@@ -1,4 +1,5 @@
 # ITS Projekt 1
+BDD testy - chování popsáno v gherkinu, testy ve frameworku Selenium 
 
 - **Autor:** Josef Kotoun, xkotou06
 - **Datum:** 2021-04-17
